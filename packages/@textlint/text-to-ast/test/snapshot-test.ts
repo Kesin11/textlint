@@ -1,13 +1,13 @@
-const fs = require("fs");
-const path = require("path");
-const assert = require("assert");
+import fs from "fs";
+import path from "path";
+import assert from "assert";
 const fixturesDir = path.join(__dirname, "snapshots");
-const parse = require("../src/index").parse;
+import { parse } from "../src";
 
 describe("Snapshot testing", () => {
-    fs.readdirSync(fixturesDir).map((caseName) => {
+    fs.readdirSync(fixturesDir).map(caseName => {
         const normalizedTestName = caseName.replace(/-/g, " ");
-        it(`Test ${normalizedTestName}`, function () {
+        it(`Test ${normalizedTestName}`, function() {
             const fixtureDir = path.join(fixturesDir, caseName);
             const actualFilePath = path.join(fixtureDir, "input.txt");
             const actualContent = fs.readFileSync(actualFilePath, "utf-8");
